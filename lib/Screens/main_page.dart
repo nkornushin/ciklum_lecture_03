@@ -58,9 +58,6 @@ class MainPageState extends State<MainPage> {
   }
 
   Widget mainGridView() {
-
-
-
     return GridView.builder(
       itemCount: fcList.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
@@ -72,37 +69,33 @@ class MainPageState extends State<MainPage> {
 
   Widget footballClub(FootballClub club) {
     return Card(
-      child: Hero(
-          tag: club.name,
-          child: Material(
-            child: InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute<void>(
-                  builder: (context) => ImageDetailsPage(assetPath: club.logo, location: club.location)
-                ));
-              },
-              child: GridTile(
-                child: club.location == 'local' ? Image.asset(club.logo) : Image.network(club.logo),
-                footer: Container(
-                  color: Colors.black45,
-                  child: ListTile(
-                    leading: Text(
-                      club.name, 
-                      style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)
-                    ),
-                  ),
+      child: Material(
+        child: InkWell(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute<void>(
+              builder: (context) => ImageDetailsPage(assetPath: club.logo, location: club.location)
+            ));
+          },
+          child: GridTile(
+            child: club.location == 'local' ? Image.asset(club.logo) : Image.network(club.logo),
+            footer: Container(
+              color: Colors.black45,
+              child: ListTile(
+                leading: Text(
+                  club.name, 
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)
                 ),
               ),
             ),
           ),
         ),
+      ),
     );
   }
 
   void _addNewClub() {
-    fcList.insert(0, FootballClub(name: 'Juventus', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Juventus_FC_2017_logo.svg/126px-Juventus_FC_2017_logo.svg.png', location: 'network'));   
     setState(() {
-      
+      fcList.insert(0, FootballClub(name: 'Juventus', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Juventus_FC_2017_logo.svg/126px-Juventus_FC_2017_logo.svg.png', location: 'network'));   
     });
   }
 }
